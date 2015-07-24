@@ -25,6 +25,6 @@ gulp.task('stylus', function(){
     .pipe(gulp.dest('./build'));
 });
 
-gulp.task('default', ['browserify']);
+gulp.task('default', ['browserify', 'stylus']);
 
 

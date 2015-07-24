@@ -9,7 +9,7 @@ var Navbar = React.createClass({
       <div id="navbar">
         <span>Navbar</span>
         <Link activeClassName="selected" to="/hello">hello</Link>
-        <Link activeClassName="selected" to="/home">home</Link>
+        <Link activeClassName="selected" to="/">home</Link>
       </div>
     );
   }

@@ -4,16 +4,15 @@ var React = require('react'),
     AppController = require('./components/AppController.jsx'),
     Hello = require('./components/Hello.jsx'),
     Home = require('./components/Home.jsx'),
-    Route = Router.Route;
+    Route = Router.Route,
+    DefaultRoute = Router.DefaultRoute;
 
-// declare our routes and their hierarchy
 var routes = (
-  React.createElement(Route, {handler: AppController}, 
+  React.createElement(Route, {path: "/", handler: AppController}, 
     React.createElement(Route, {path: "hello", handler: Hello}), 
-    React.createElement(Route, {path: "home", handler: Home})
+    React.createElement(Route, {path: "", handler: Home})
   )
 );
-
 
 Router.run(routes, Router.HashLocation, function(Root){
   React.render(React.createElement(Root, null), document.getElementById('main'));
@@ -83,7 +82,7 @@ var Navbar = React.createClass({displayName: "Navbar",
       React.createElement("div", {id: "navbar"}, 
         React.createElement("span", null, "Navbar"), 
         React.createElement(Link, {activeClassName: "selected", to: "/hello"}, "hello"), 
-        React.createElement(Link, {activeClassName: "selected", to: "/home"}, "home")
+        React.createElement(Link, {activeClassName: "selected", to: "/"}, "home")
       )
     );
   }

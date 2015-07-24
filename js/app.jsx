@@ -3,16 +3,15 @@ var React = require('react'),
     AppController = require('./components/AppController.jsx'),
     Hello = require('./components/Hello.jsx'),
     Home = require('./components/Home.jsx'),
-    Route = Router.Route;
+    Route = Router.Route,
+    DefaultRoute = Router.DefaultRoute;
 
-// declare our routes and their hierarchy
 var routes = (
-  <Route handler={AppController}>
+  <Route path="/" handler={AppController}>
     <Route path="hello" handler={Hello}/>
-    <Route path="home" handler={Home}/>
+    <Route path="" handler={Home}/>
   </Route>
 );
-
 
 Router.run(routes, Router.HashLocation, function(Root){
   React.render(<Root/>, document.getElementById('main'));
