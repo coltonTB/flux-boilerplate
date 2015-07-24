@@ -22,7 +22,7 @@ var SeekPanda = React.createClass({
 
     var content = ({
       'home' : 'Welcome Home',
-      'hello': 'Hello World'
+      'hello': 'Hello World!'
     })[this.state.navigationState];
 
     return (<div>

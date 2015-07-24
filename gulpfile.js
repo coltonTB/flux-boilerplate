@@ -1,20 +1,30 @@
 var gulp = require('gulp'),
+    watch = require('gulp-watch'),
     browserify = require('browserify'),
     reactify = require('reactify'),
     stylus = require('gulp-stylus'),
-    fs = require('fs');
+    watchify = require('watchify'),
+    source = require('vinyl-source-stream');
 
-gulp.task('browserify', function(){
-  browserify('./js/app.jsx')
-    .transform([reactify])
-    .bundle()
-    .pipe(fs.createWriteStream('./build/bundle.js'))
-});
+var b = watchify(browserify('./js/app.jsx')); 
+b.transform(reactify);
+b.on('update', bundle);
+
+function bundle() {
+  return b.bundle()
+    .pipe(source('bundle.js'))
+    .pipe(gulp.dest('./build'));
+}
+
+gulp.task('browserify', bundle);
 
 gulp.task('stylus', function(){
   gulp.src('./stylesheets/main.styl')
+    .pipe(watch('./stylesheets/*.styl'))
     .pipe(stylus())
     .pipe(gulp.dest('./build'));
 });
 
 gulp.task('default', ['browserify']);
+
+
