@@ -1,39 +1,17 @@
 var React = require('react'),
-    Nav = require('../actions/NavigationActionCreator.js');
+    Link = require('react-router').Link;
 
 var Navbar = React.createClass({
 
-  getDefaultProps: function() {
-    return {
-      selectedState: 'home'
-    };
-  },
-
   render: function() {
-
-    var sel = this.props.selectedState;
 
     return (
       <div id="navbar">
         <span>Navbar</span>
-        <button className={sel === 'home' ? 'selected':''}
-                onClick={this._navHome}>
-          home
-        </button>
-        <button className={sel === 'hello' ? 'selected':''}
-                onClick={this._navProfile}>
-          hello
-        </button>
+        <Link activeClassName="selected" to="/hello">hello</Link>
+        <Link activeClassName="selected" to="/home">home</Link>
       </div>
     );
-  },
-
-  _navHome: function(){
-    Nav.navigateTo('home');
-  },
-
-  _navProfile: function(){
-    Nav.navigateTo('hello');
   }
 
 });

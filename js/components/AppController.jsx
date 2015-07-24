@@ -1,38 +1,20 @@
 var React = require('react'),
     Navbar = require('./Navbar.jsx'),
-    NavigationStore = require('../stores/NavigationStore.js');
+    Router = require('react-router'),
+    RouteHandler = Router.RouteHandler;
 
-var SeekPanda = React.createClass({
-
-  getInitialState: function() {
-    return {
-      navigationState: 'home' 
-    };
-  },
-
-  componentDidMount: function() {
-    NavigationStore.on('navigate', function(state){
-      this.setState({
-        navigationState: state
-      })
-    }.bind(this));
-  },
+var AppController = React.createClass({
 
   render: function() {
 
-    var content = ({
-      'home' : 'Welcome Home',
-      'hello': 'Hello World!'
-    })[this.state.navigationState];
-
     return (<div>
-      <Navbar selectedState={this.state.navigationState}/>
+      <Navbar />
       <div id="content">
-        {content}
+        <RouteHandler/>
       </div>
     </div>);
   }
 
 });
 
-module.exports = SeekPanda;
+module.exports = AppController;
