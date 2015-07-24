@@ -3,18 +3,27 @@ var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
 var NavigationStore = assign({}, EventEmitter.prototype, {
-
+  navigateTo: function(state){
+    this.emit('navigate', state);
+  }
 });
 
-// Register callback to handle all updates
 AppDispatcher.register(function(action) {
-  var text;
 
-  switch(action.actionType) {
-    case 
+  if (action.actionType !== 'navigate')
+    return;
+
+  switch(action.state) {
+    case 'home':
+      NavigationStore.navigateTo('home')
       break;
 
+    case 'profile':
+      NavigationStore.navigateTo('profile')
+
     default:
+      // noop
+      break;
   }
 });
 
