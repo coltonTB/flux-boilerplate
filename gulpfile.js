@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     watchify = require('watchify'),
     source = require('vinyl-source-stream');
 
-var b = watchify(browserify('./js/app.jsx')); 
+var b = watchify(browserify('./js/app.js')); 
 b.transform(reactify);
 b.on('update', bundle);
 

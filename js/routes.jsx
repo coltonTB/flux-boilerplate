@@ -3,8 +3,7 @@ var React = require('react'),
     AppController = require('./components/AppController.jsx'),
     Hello = require('./components/Hello.jsx'),
     Home = require('./components/Home.jsx'),
-    Route = Router.Route,
-    DefaultRoute = Router.DefaultRoute;
+    Route = Router.Route;
 
 var routes = (
   <Route path="/" handler={AppController}>
@@ -13,6 +12,4 @@ var routes = (
   </Route>
 );
 
-Router.run(routes, Router.HashLocation, function(Root){
-  React.render(<Root/>, document.getElementById('main'));
-});
+module.exports = routes;
