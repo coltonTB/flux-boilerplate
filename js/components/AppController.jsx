@@ -21,12 +21,12 @@ var SeekPanda = React.createClass({
   render: function() {
 
     var content = ({
-      'home' : 'YOU ARE HOME',
-      'profile': 'YOU ARE AT PROFILE'
+      'home' : 'Welcome Home',
+      'hello': 'Hello World'
     })[this.state.navigationState];
 
     return (<div>
-      <Navbar />
+      <Navbar selectedState={this.state.navigationState}/>
       <div id="content">
         {content}
       </div>

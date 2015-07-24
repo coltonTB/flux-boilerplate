@@ -47,12 +47,12 @@ var SeekPanda = React.createClass({displayName: "SeekPanda",
   render: function() {
 
     var content = ({
-      'home' : 'YOU ARE HOME',
-      'profile': 'YOU ARE AT PROFILE'
+      'home' : 'Welcome Home',
+      'hello': 'Hello World'
     })[this.state.navigationState];
 
     return (React.createElement("div", null, 
-      React.createElement(Navbar, null), 
+      React.createElement(Navbar, {selectedState: this.state.navigationState}), 
       React.createElement("div", {id: "content"}, 
         content
       )
@@ -65,16 +65,31 @@ module.exports = SeekPanda;
 
 },{"../stores/NavigationStore.js":6,"./Navbar.jsx":4,"react":167}],4:[function(require,module,exports){
 var React = require('react'),
-    Nav = require('../actions/NavigationActionCreator.js')
+    Nav = require('../actions/NavigationActionCreator.js');
 
 var Navbar = React.createClass({displayName: "Navbar",
 
+  getDefaultProps: function() {
+    return {
+      selectedState: 'home'
+    };
+  },
+
   render: function() {
+
+    var sel = this.props.selectedState;
+
     return (
-      React.createElement("div", null, 
-        React.createElement("h1", null, "HEADER"), 
-        React.createElement("button", {onClick: this._navHome}, "HOME"), 
-        React.createElement("button", {onClick: this._navProfile}, "PROFILE")
+      React.createElement("div", {id: "navbar"}, 
+        React.createElement("span", null, "Navbar"), 
+        React.createElement("button", {className: sel === 'home' ? 'selected':'', 
+                onClick: this._navHome}, 
+          "home"
+        ), 
+        React.createElement("button", {className: sel === 'hello' ? 'selected':'', 
+                onClick: this._navProfile}, 
+          "hello"
+        )
       )
     );
   },
@@ -84,7 +99,7 @@ var Navbar = React.createClass({displayName: "Navbar",
   },
 
   _navProfile: function(){
-    Nav.navigateTo('profile');
+    Nav.navigateTo('hello');
   }
 
 });
@@ -101,9 +116,17 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
+var _state = 'home'
+
 var NavigationStore = assign({}, EventEmitter.prototype, {
-  navigateTo: function(state){
-    this.emit('navigate', state);
+  
+  navigateTo: function(newState){
+    _state = newState;
+    this.emit('navigate', newState);
+  },
+
+  getCurrentState: function(){
+    return _state;
   }
 });
 
@@ -117,8 +140,8 @@ AppDispatcher.register(function(action) {
       NavigationStore.navigateTo('home')
       break;
 
-    case 'profile':
-      NavigationStore.navigateTo('profile')
+    case 'hello':
+      NavigationStore.navigateTo('hello')
 
     default:
       // noop

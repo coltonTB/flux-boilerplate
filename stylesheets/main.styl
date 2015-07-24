@@ -1,2 +1,32 @@
-body
-  color red
+#main
+  width 600px
+  margin-right auto
+  margin-left auto
+  font-family helvetica, sans-serif
+  
+#navbar
+  height: 40px;
+  background-color: #ddd;
+  button
+    background #eee
+    border none
+    height 40px
+    padding 0 22px
+    float right
+    border-bottom 2px solid transparent
+    &:active, &:focus
+      outline 0
+    &:hover
+      cursor pointer
+    &.selected
+      border-color gray
+  span
+    height 40px
+    line-height 40px
+    padding 10px 20px
+    
+#content
+  text-align center
+  font-size 2em
+  font-weight 100
+  margin 40px 0

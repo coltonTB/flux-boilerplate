@@ -1,3 +1,38 @@
-body {
-  color: #f00;
+#main {
+  width: 600px;
+  margin-right: auto;
+  margin-left: auto;
+  font-family: helvetica, sans-serif;
+}
+#navbar {
+  height: 40px;
+  background-color: #ddd;
+}
+#navbar button {
+  background: #eee;
+  border: none;
+  height: 40px;
+  padding: 0 22px;
+  float: right;
+  border-bottom: 2px solid transparent;
+}
+#navbar button:active,
+#navbar button:focus {
+  outline: 0;
+}
+#navbar button:hover {
+  cursor: pointer;
+}
+#navbar button.selected {
+  border-color: #808080;
+}
+#navbar span {
+  height: 40px;
+  line-height: 40px;
+  padding: 10px 20px;
+}
+#content {
+  text-align: center;
+  font-size: 2em;
+  margin: 40px 0;
 }

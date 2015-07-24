@@ -2,9 +2,17 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
+var _state = 'home'
+
 var NavigationStore = assign({}, EventEmitter.prototype, {
-  navigateTo: function(state){
-    this.emit('navigate', state);
+  
+  navigateTo: function(newState){
+    _state = newState;
+    this.emit('navigate', newState);
+  },
+
+  getCurrentState: function(){
+    return _state;
   }
 });
 
@@ -18,8 +26,8 @@ AppDispatcher.register(function(action) {
       NavigationStore.navigateTo('home')
       break;
 
-    case 'profile':
-      NavigationStore.navigateTo('profile')
+    case 'hello':
+      NavigationStore.navigateTo('hello')
 
     default:
       // noop
