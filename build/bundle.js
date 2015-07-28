@@ -324,36 +324,48 @@ var SignUp = React.createClass({displayName: "SignUp",
 module.exports = SignUp;
 
 },{"react":240}],12:[function(require,module,exports){
-var React = require('react');
-
-var AdminHome = React.createClass({displayName: "AdminHome",
-
-  render: function() {
-    return (
-      React.createElement("div", null, " Admin home. Match up these jobs ")
-    );
-  }
-
-});
-
-module.exports = AdminHome;
-
-},{"react":240}],13:[function(require,module,exports){
-var React = require('react');
+var React = require('react'),
+    JobList = require('../JobList.jsx');
 
 var CustomerHome = React.createClass({displayName: "CustomerHome",
 
+  propTypes: {
+    jobList: React.PropTypes.array.isRequired
+  },
+
   render: function() {
-    return (
-      React.createElement("div", null, "Customer Home. Here are jobs")
-    );
+    return (React.createElement("div", null, 
+      React.createElement("div", null, " Admin home. Match up these jobs "), 
+      React.createElement(JobList, {jobs: this.props.jobList})
+    ));
   }
 
 });
 
 module.exports = CustomerHome;
 
-},{"react":240}],14:[function(require,module,exports){
+},{"../JobList.jsx":6,"react":240}],13:[function(require,module,exports){
+var React = require('react'),
+    JobList = require('../JobList.jsx');
+
+var CustomerHome = React.createClass({displayName: "CustomerHome",
+
+  propTypes: {
+    jobList: React.PropTypes.array.isRequired
+  },
+
+  render: function() {
+    return (React.createElement("div", null, 
+      React.createElement("div", null, "Customer Home. Here are jobs"), 
+      React.createElement(JobList, {jobs: this.props.jobList})
+    ));
+  }
+
+});
+
+module.exports = CustomerHome;
+
+},{"../JobList.jsx":6,"react":240}],14:[function(require,module,exports){
 var React = require('react');
 
 var LoggedOutHome = React.createClass({displayName: "LoggedOutHome",
@@ -462,12 +474,13 @@ var EventEmitter = require('events').EventEmitter,
 var SessionStore = assign({}, EventEmitter.prototype, {
 
   isLoggedIn: function(){
-    var token = sessionStorage.getItem('accessToken')
+    var token = sessionStorage.getItem('accessToken');
     return token !== 'undefined' && typeof token === 'string';
   },
 
   getUserType: function(){
-    return 'panda';
+    var token = sessionStorage.getItem('accessToken');
+    return token;
   },
 
   getAccessToken: function(){
@@ -497,6 +510,7 @@ SessionStore.dispatchToken = Dispatcher.register(function(action) {
     case ActionTypes.LOGOUT:
       sessionStorage.removeItem('accessToken');
       SessionStore.emit('change')
+      window.location = '/';
       break;
 
     default:

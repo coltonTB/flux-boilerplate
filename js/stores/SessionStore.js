@@ -7,12 +7,13 @@ var EventEmitter = require('events').EventEmitter,
 var SessionStore = assign({}, EventEmitter.prototype, {
 
   isLoggedIn: function(){
-    var token = sessionStorage.getItem('accessToken')
+    var token = sessionStorage.getItem('accessToken');
     return token !== 'undefined' && typeof token === 'string';
   },
 
   getUserType: function(){
-    return 'panda';
+    var token = sessionStorage.getItem('accessToken');
+    return token;
   },
 
   getAccessToken: function(){
@@ -42,6 +43,7 @@ SessionStore.dispatchToken = Dispatcher.register(function(action) {
     case ActionTypes.LOGOUT:
       sessionStorage.removeItem('accessToken');
       SessionStore.emit('change')
+      window.location = '/';
       break;
 
     default:

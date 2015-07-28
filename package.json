@@ -25,6 +25,7 @@
     "watchify": "^3.3.0"
   },
   "devDependencies": {
+    "body-parser": "^1.13.2",
     "express": "^4.13.1"
   }
 }

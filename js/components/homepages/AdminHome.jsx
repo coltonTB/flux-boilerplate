@@ -1,13 +1,19 @@
-var React = require('react');
+var React = require('react'),
+    JobList = require('../JobList.jsx');
 
-var AdminHome = React.createClass({
+var CustomerHome = React.createClass({
+
+  propTypes: {
+    jobList: React.PropTypes.array.isRequired
+  },
 
   render: function() {
-    return (
+    return (<div> 
       <div> Admin home. Match up these jobs </div>
-    );
+      <JobList jobs={this.props.jobList} />
+    </div>);
   }
 
 });
 
-module.exports = AdminHome;
+module.exports = CustomerHome;
