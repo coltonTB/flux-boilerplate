@@ -2,6 +2,8 @@ var React = require('react/addons'),
     SessionActions = require('../actions/SessionActions.js'),
     SessionStore = require('../stores/SessionStore.js');
 
+var setErrorStateFn;
+
 var Hello = React.createClass({
 
   mixins: [React.addons.LinkedStateMixin],
@@ -15,9 +17,14 @@ var Hello = React.createClass({
   },
 
   componentDidMount: function () {
-    SessionStore.on('error', function(err){
-      this.setState({error: err});
-    }.bind(this)); 
+    setErrorStateFn = function(err){
+      this.setState({error:err});
+    }.bind(this);
+    SessionStore.on('error', setErrorStateFn);
+  },
+
+  componentWillUnmount: function () {
+    SessionStore.removeListener('error', setErrorStateFn);  
   },
 
   _logIn: function(){

@@ -11,6 +11,8 @@ var LoggedOutHome = require('./homepages/LoggedOutHome.jsx'),
     CustomerHome = require('./homepages/CustomerHome.jsx'),
     AdminHome = require('./homepages/AdminHome.jsx');
 
+var setStateLoadedFn;
+
 var Home = React.createClass({
 
   propTypes: {
@@ -25,15 +27,20 @@ var Home = React.createClass({
   },
 
   componentDidMount: function() {
-
-    JobsActions.getJobs();
-
-    JobsStore.on('loaded', function(){
+    // keep a reference to this function so we can
+    // remove it when the component unmounts
+    setStateLoadedFn = function() {
       this.setState({
         jobList: JobsStore.getJobList(),
         jobsState: 'loaded'
       });
-    }.bind(this));
+    }.bind(this);
+    JobsActions.getJobs();
+    JobsStore.on('loaded', setStateLoadedFn);
+  },
+
+  componentWillUnmount: function () {
+    JobsStore.removeListener('loaded', setStateLoadedFn);  
   },
 
   render: function() {

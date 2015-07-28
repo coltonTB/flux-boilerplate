@@ -13,12 +13,6 @@ var AppController = React.createClass({
     };
   },
 
-  componentDidMount: function() {
-    sessionStore.on('change', function(){
-      this.setState(this.getInitialState())
-    }.bind(this));
-  },
-
   render: function() {
     return (<div>
       <Navbar isLoggedIn={this.state.loggedIn} />

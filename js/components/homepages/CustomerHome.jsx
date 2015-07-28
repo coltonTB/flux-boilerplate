@@ -1,6 +1,7 @@
 var React = require('react'),
     JobList = require('../JobList.jsx'),
-    RequestJob = require('../RequestJob.jsx');
+    RequestJob = require('../RequestJob.jsx'),
+    Link = require('react-router').Link;
 
 var CustomerHome = React.createClass({
 

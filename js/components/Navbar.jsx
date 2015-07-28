@@ -22,8 +22,8 @@ var Navbar = React.createClass({
     }else{
       return (<div id="navbar">
         <Link to="/">Home</Link>
-        <Link to="/signup" className="right">Sign Up</Link>
-        <Link to="/login" className="right" activeClassName="selected" >Log In</Link>
+        <Link to="/signup" className="right" activeClassName="selected">Sign Up</Link>
+        <Link to="/login" className="right" activeClassName="selected">Log In</Link>
       </div>)
     }
   }

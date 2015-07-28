@@ -75,12 +75,6 @@ var AppController = React.createClass({displayName: "AppController",
     };
   },
 
-  componentDidMount: function() {
-    sessionStore.on('change', function(){
-      this.setState(this.getInitialState())
-    }.bind(this));
-  },
-
   render: function() {
     return (React.createElement("div", null, 
       React.createElement(Navbar, {isLoggedIn: this.state.loggedIn}), 
@@ -108,6 +102,8 @@ var LoggedOutHome = require('./homepages/LoggedOutHome.jsx'),
     CustomerHome = require('./homepages/CustomerHome.jsx'),
     AdminHome = require('./homepages/AdminHome.jsx');
 
+var setStateLoadedFn;
+
 var Home = React.createClass({displayName: "Home",
 
   propTypes: {
@@ -122,15 +118,20 @@ var Home = React.createClass({displayName: "Home",
   },
 
   componentDidMount: function() {
-
-    JobsActions.getJobs();
-
-    JobsStore.on('loaded', function(){
+    // keep a reference to this function so we can
+    // remove it when the component unmounts
+    setStateLoadedFn = function() {
       this.setState({
         jobList: JobsStore.getJobList(),
         jobsState: 'loaded'
       });
-    }.bind(this));
+    }.bind(this);
+    JobsActions.getJobs();
+    JobsStore.on('loaded', setStateLoadedFn);
+  },
+
+  componentWillUnmount: function () {
+    JobsStore.removeListener('loaded', setStateLoadedFn);  
   },
 
   render: function() {
@@ -211,6 +212,8 @@ var React = require('react/addons'),
     SessionActions = require('../actions/SessionActions.js'),
     SessionStore = require('../stores/SessionStore.js');
 
+var setErrorStateFn;
+
 var Hello = React.createClass({displayName: "Hello",
 
   mixins: [React.addons.LinkedStateMixin],
@@ -224,9 +227,14 @@ var Hello = React.createClass({displayName: "Hello",
   },
 
   componentDidMount: function () {
-    SessionStore.on('error', function(err){
-      this.setState({error: err});
-    }.bind(this)); 
+    setErrorStateFn = function(err){
+      this.setState({error:err});
+    }.bind(this);
+    SessionStore.on('error', setErrorStateFn);
+  },
+
+  componentWillUnmount: function () {
+    SessionStore.removeListener('error', setErrorStateFn);  
   },
 
   _logIn: function(){
@@ -277,7 +285,7 @@ var Navbar = React.createClass({displayName: "Navbar",
     }else{
       return (React.createElement("div", {id: "navbar"}, 
         React.createElement(Link, {to: "/"}, "Home"), 
-        React.createElement(Link, {to: "/signup", className: "right"}, "Sign Up"), 
+        React.createElement(Link, {to: "/signup", className: "right", activeClassName: "selected"}, "Sign Up"), 
         React.createElement(Link, {to: "/login", className: "right", activeClassName: "selected"}, "Log In")
       ))
     }
@@ -388,7 +396,8 @@ module.exports = CustomerHome;
 },{"../JobList.jsx":6,"react":241}],14:[function(require,module,exports){
 var React = require('react'),
     JobList = require('../JobList.jsx'),
-    RequestJob = require('../RequestJob.jsx');
+    RequestJob = require('../RequestJob.jsx'),
+    Link = require('react-router').Link;
 
 var CustomerHome = React.createClass({displayName: "CustomerHome",
 
@@ -411,7 +420,7 @@ var CustomerHome = React.createClass({displayName: "CustomerHome",
 
 module.exports = CustomerHome;
 
-},{"../JobList.jsx":6,"../RequestJob.jsx":11,"react":241}],15:[function(require,module,exports){
+},{"../JobList.jsx":6,"../RequestJob.jsx":11,"react":241,"react-router":54}],15:[function(require,module,exports){
 var React = require('react'),
     Link = require('react-router').Link;
 
