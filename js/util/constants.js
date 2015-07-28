@@ -15,6 +15,7 @@ module.exports = {
   ActionTypes: keyMirror({
     LOGIN: null,
     LOGOUT: null,
+    SET_TOKEN: null,
     GET_JOBS: null
   })
 };

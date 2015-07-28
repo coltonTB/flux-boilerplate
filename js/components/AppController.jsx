@@ -3,7 +3,8 @@ var React = require('react'),
     Router = require('react-router'),
     RouteHandler = Router.RouteHandler;
 
-var sessionStore = require('../stores/SessionStore.js');
+var sessionStore = require('../stores/SessionStore.js'),
+    refreshFn;
 
 var AppController = React.createClass({
 
@@ -11,6 +12,17 @@ var AppController = React.createClass({
     return {
       loggedIn: sessionStore.isLoggedIn()
     };
+  },
+
+  componentDidMount: function() {
+    refreshFn = function(){
+      this.setState(this.getInitialState());
+    }.bind(this);
+    sessionStore.on('change', refreshFn);
+  },
+
+  componentWillUnmount: function () {
+    sessionStore.removeListener('change', refreshFn);  
   },
 
   render: function() {

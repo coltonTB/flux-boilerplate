@@ -1,5 +1,6 @@
 var React = require('react/addons'),
-    Navigation = require('react-router').Navigation;
+    Navigation = require('react-router').Navigation,
+    SessionActions = require('../../actions/SessionActions.js');
 
 var SignupConfirmed = React.createClass({
 
@@ -23,6 +24,7 @@ var SignupConfirmed = React.createClass({
   },
 
   _submitForm: function() {
+    SessionActions.setToken(this.props.params.code);
     this.transitionTo('/profile');
   },
 

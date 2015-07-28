@@ -15,6 +15,15 @@ var SessionActions = {
       type: ActionTypes.LOGOUT,
       data: null
     });
+  },
+
+  setToken: function(token){
+    AppDispatcher.dispatch({
+      type: ActionTypes.SET_TOKEN,
+      data: {
+        token: token
+      }
+    })
   }
 };
 

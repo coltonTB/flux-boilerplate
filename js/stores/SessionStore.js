@@ -13,7 +13,9 @@ var SessionStore = assign({}, EventEmitter.prototype, {
 
   getUserType: function(){
     var token = sessionStorage.getItem('accessToken');
-    return token;
+    return token === 'customer' || token === 'panda' || token == 'admin' 
+      ? token
+      : 'customer';
   },
 
   getAccessToken: function(){
@@ -40,9 +42,13 @@ SessionStore.dispatchToken = Dispatcher.register(function(action) {
       });
       break;
 
+    case ActionTypes.SET_TOKEN:
+      sessionStorage.setItem('accessToken', action.data.token);
+      SessionStore.emit('change');
+      break;
+
     case ActionTypes.LOGOUT:
       sessionStorage.removeItem('accessToken');
-      SessionStore.emit('change')
       window.location = '/';
       break;
 

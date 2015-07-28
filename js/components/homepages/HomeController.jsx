@@ -52,6 +52,8 @@ var Home = React.createClass({
         return <CustomerHome jobList={this.state.jobList}/>
       }else if (userType === 'admin'){
         return <AdminHome jobList={this.state.jobList}/>
+      }else{
+        return <LoggedOutHome />
       }
     }
   }
