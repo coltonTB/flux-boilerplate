@@ -1,5 +1,6 @@
 var React = require('react'),
-    JobList = require('../JobList.jsx');
+    JobList = require('../JobList.jsx'),
+    RequestJob = require('../RequestJob.jsx');
 
 var CustomerHome = React.createClass({
 
@@ -8,8 +9,12 @@ var CustomerHome = React.createClass({
   },
 
   render: function() {
+
     return (<div> 
-      <div>Customer Home. Here are jobs</div>
+      <h2>Your Jobs</h2>
+      <Link className="request-job" to="/requestjob">
+        Request a Job
+      </Link>
       <JobList jobs={this.props.jobList} />
     </div>);
   }

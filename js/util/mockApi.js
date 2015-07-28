@@ -28,7 +28,7 @@ app.post(API.LOGIN, function(req, res, next){
     return;
   }
   res.json({token: token});
-  
+
 });
 
 app.get(API.JOBS, function(req, res, next){
@@ -37,7 +37,22 @@ app.get(API.JOBS, function(req, res, next){
   for(var i=0; i < 10; i++){
     jobsList.push({
       jobStatus: 'pending',
-      test: '234'
+      title: 'Interpretation in Beijing',
+      description: 'I need somebody to be my interpreter in beijing...',
+      pricePerHour: 35,
+      pricePerWord: null,
+      currency: 'USD',
+      estimatedDuration: 8,
+      dateCreated: new Date().getTime(),
+      creator: {
+        firstName: 'Matt',
+        lastName: 'Conger',
+        id: 'abc123'
+      },
+      panda: {
+        firstName: 'Peter',
+        LastName: 'Liu'
+      }
     });
   }
   res.json({

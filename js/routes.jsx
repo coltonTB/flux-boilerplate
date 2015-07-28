@@ -5,6 +5,7 @@ var React = require('react'),
     Home = require('./components/Home.jsx'),
     Profile = require('./components/Profile.jsx'),
     SignUp = require('./components/SignUp.jsx'),
+    RequestJob = require('./components/RequestJob.jsx'),
     Route = Router.Route;
 
 var routes = (
@@ -12,6 +13,7 @@ var routes = (
     <Route path="/login" handler={LogIn}/>
     <Route path="/signup" handler={SignUp}/>
     <Route path="/profile" handler={Profile}/>
+    <Route path="/requestjob" handler={RequestJob}/>
     <Route path="" handler={Home}/>
   </Route>
 );

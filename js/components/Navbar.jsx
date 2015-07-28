@@ -13,26 +13,19 @@ var Navbar = React.createClass({
   },
 
   render: function() {
-    var LogInOut = this.props.isLoggedIn
-      ? <a href="javascript:;" onClick={this._logOut}>Log Out</a>
-      : <Link activeClassName="selected" to="/login">Log In</Link>
-
-    var profileLink = this.props.isLoggedIn
-      ? <Link activeClassName="selected" to="/profile">profile</Link>
-      : '';
-
-    var signupLink = this.props.isLoggedIn
-      ? ''
-      : <Link to="/signup">Sign Up</Link>
-
-    return (
-      <div id="navbar">
-        <Link className="home" to="/">SeekPanda</Link>
-        {LogInOut}
-        {profileLink}
-        {signupLink}
-      </div>
-    );
+    if (this.props.isLoggedIn) {
+      return (<div id="navbar">
+        <Link to="/" className="jobs" activeClassName="selected">jobs</Link>
+        <Link to="/profile" activeClassName="selected" >profile</Link>
+        <a className="right" href="javascript:;" onClick={this._logOut}>Log Out</a>
+      </div>)
+    }else{
+      return (<div id="navbar">
+        <Link to="/">Home</Link>
+        <Link to="/signup" className="right">Sign Up</Link>
+        <Link to="/login" className="right" activeClassName="selected" >Log In</Link>
+      </div>)
+    }
   }
 
 });

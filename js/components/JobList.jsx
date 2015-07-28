@@ -14,9 +14,9 @@ var JobList = React.createClass({
     });
 
     return (
-      <div className="job-list">
+      <table className="job-list">
         {jobs}
-      </div>
+      </table>
     );
   }
 

@@ -28,16 +28,14 @@ var Hello = React.createClass({
   },
 
   render: function() {
-    return (<div>
-      <label>Email</label>
-      <input type="email" valueLink={this.linkState('email')}/>
-
-      <label>Password</label>
-      <input type="password" valueLink={this.linkState('password')}/>
-
-      <button onClick={this._logIn}>
-        Log In
-      </button>
+    return (<div id="log-in">
+      <input type="email"
+             valueLink={this.linkState('email')}
+             placeholder="email"/>
+      <input type="password" 
+             valueLink={this.linkState('password')}
+             placeholder="password"/>
+      <button onClick={this._logIn}>Log In</button>
     </div>);
   }
 
