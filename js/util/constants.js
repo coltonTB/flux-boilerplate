@@ -1,39 +1,20 @@
 var keyMirror = require('keymirror');
 
-var APIRoot = "http://localhost:4000/api/v1";
-
 module.exports = {
+
+  APIRoot: "http://localhost:3000/api/v1",
+
   APIEndpoints: {
-    LOGIN: APIRoot + "/sessions",
-    FORGOT_PASSWORD: APIRoot + "/password_resets",
-    RESET_PASSWORD: APIRoot + "/password_resets/reset",
-    USERS: APIRoot + "/users",
-    JOBS: APIRoot + "/jobs"
+    LOGIN: "/sessions",
+    FORGOT_PASSWORD: "/password_resets",
+    RESET_PASSWORD: "/password_resets/reset",
+    USERS: "/users",
+    JOBS: "/jobs"
   },
 
-  PayloadSources: keyMirror({
-    SERVER_ACTION: null,
-    VIEW_ACTION: null
-  }),
-
   ActionTypes: keyMirror({
-    REDIRECT: null,
-    SIGNUP_REQUEST: null,
-    LOGIN_REQUEST: null,
-    LOGIN_RESPONSE: null,
-    CONFIRM_RESPONSE: null,
-    SIGNUP_RESPONSE: null,
-    LOAD_SECRETS: null,
-    RECEIVE_SECRETS: null,
-    FORGOT_PASSWORD_RESPONSE: null,
-    RESET_PASSWORD_RESPONSE: null,
-    ACCOUNT_RESPONSE: null,
-    UPDATE_ACCOUNT_REQUEST: null,
-    UPDATE_ACCOUNT_RESPONSE: null,
-    PROFILE_RESPONSE: null,
-    LOAD_PROFILE: null,
-    UPDATE_PROFILE_REQUEST: null,
-    UPDATE_PROFILE_RESPONSE: null,
-    LOGOUT: null
+    LOGIN: null,
+    LOGOUT: null,
+    RESET_PASSWORD: null
   })
 };

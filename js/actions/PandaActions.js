@@ -7,8 +7,10 @@ var PandaActions = {
    */
   create: function(text) {
     AppDispatcher.dispatch({
-      actionType: 'type',
-      text: 'text'
+      type: 'type',
+      data: {
+
+      }
     });
   }
 };
