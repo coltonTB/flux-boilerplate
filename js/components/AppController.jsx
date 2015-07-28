@@ -20,17 +20,11 @@ var AppController = React.createClass({
   },
 
   render: function() {
-
-    var loginStatus = this.state.loggedIn
-      ? 'Logged In'
-      : 'Logged Out';
-
     return (<div>
-      <Navbar isLoggedIn={this.state.loggedIn}/>
+      <Navbar isLoggedIn={this.state.loggedIn} />
       <div id="content">
-        <RouteHandler/>
+        <RouteHandler isLoggedIn={this.state.loggedIn} />
       </div>
-      {loginStatus}
     </div>);
   }
 

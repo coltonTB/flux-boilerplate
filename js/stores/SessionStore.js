@@ -6,12 +6,16 @@ var EventEmitter = require('events').EventEmitter,
 
 var SessionStore = assign({}, EventEmitter.prototype, {
 
-  isLoggedIn: function() {
+  isLoggedIn: function(){
     var token = sessionStorage.getItem('accessToken')
     return token !== 'undefined' && typeof token === 'string';
   },
 
-  getAccessToken: function() {
+  getUserType: function(){
+    return 'panda';
+  },
+
+  getAccessToken: function(){
     return sessionStorage.getItem('accessToken');
   }
 
@@ -30,7 +34,7 @@ SessionStore.dispatchToken = Dispatcher.register(function(action) {
         }else{
           response = JSON.parse(res.text);
           sessionStorage.setItem('accessToken', response.token);
-          SessionStore.emit('change', response);
+          window.location = '/';
         }
       });
       break;
