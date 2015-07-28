@@ -98,7 +98,7 @@ ul li:before {
   height: 40px;
   background-color: #ddd;
 }
-#navbar a {
+#navbar a:not(.home) {
   background: #eee;
   border: none;
   height: 38px;
@@ -108,17 +108,17 @@ ul li:before {
   float: right;
   border-bottom: 2px solid transparent;
 }
-#navbar a:active,
-#navbar a:focus {
+#navbar a:not(.home):active,
+#navbar a:not(.home):focus {
   outline: 0;
 }
-#navbar a:hover {
+#navbar a:not(.home):hover {
   cursor: pointer;
 }
-#navbar a.selected {
+#navbar a:not(.home).selected {
   border-color: #808080;
 }
-#navbar span {
+#navbar a.home {
   height: 40px;
   line-height: 40px;
   padding: 10px 20px;
