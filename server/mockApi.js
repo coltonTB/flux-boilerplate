@@ -1,6 +1,6 @@
 var express = require('express'),
     bodyParser = require('body-parser'),
-    API = require('./constants.js').APIEndpoints;
+    API = require('../js/util/constants.js').APIEndpoints;
 
 var app = module.exports = express();
 

@@ -10,7 +10,6 @@ var CustomerHome = React.createClass({
   },
 
   render: function() {
-
     return (<div> 
       <h2>Your Jobs</h2>
       <Link className="request-job" to="/requestjob">

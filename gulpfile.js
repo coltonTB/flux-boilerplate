@@ -9,6 +9,9 @@ var gulp = require('gulp'),
 var b = watchify(browserify('./js/app.js')); 
 b.transform(reactify);
 b.on('update', bundle);
+b.on('update', function(u){
+    console.log(u);
+});
 
 function bundle() {
   return b.bundle()
@@ -20,7 +23,7 @@ gulp.task('browserify', bundle);
 
 gulp.task('stylus', function(){
   gulp.src('./stylesheets/main.styl')
-    .pipe(watch('./stylesheets/*.styl'))
+    .pipe(watch('./stylesheets/**/*.styl'))
     .pipe(stylus())
     .pipe(gulp.dest('./build'));
 });

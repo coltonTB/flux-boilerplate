@@ -7,8 +7,15 @@ em {
   outline: 0;
 }
 button:hover,
-a:hover {
+a:hover,
+input[type="checkbox"]:hover {
   cursor: pointer;
+}
+button:hover {
+  background: #eee;
+}
+button {
+  transition: background 0.5s;
 }
 button,
 input {

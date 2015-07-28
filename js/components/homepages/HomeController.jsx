@@ -1,15 +1,12 @@
 var React = require('react'),
-    SessionStore = require('../stores/SessionStore.js'),
-    JobsStore = require('../stores/JobsStore.js'),
-    JobsActions = require('../actions/JobsActions.js');
+    SessionStore = require('../../stores/SessionStore.js'),
+    JobsStore = require('../../stores/JobsStore.js'),
+    JobsActions = require('../../actions/JobsActions.js');
 
-var Router = require('react-router'),
-    Navigation = Router.Navigation;
-
-var LoggedOutHome = require('./homepages/LoggedOutHome.jsx'),
-    PandaHome = require('./homepages/PandaHome.jsx'),
-    CustomerHome = require('./homepages/CustomerHome.jsx'),
-    AdminHome = require('./homepages/AdminHome.jsx');
+var LoggedOutHome = require('./LoggedOutHome.jsx'),
+    PandaHome = require('./PandaHome.jsx'),
+    CustomerHome = require('./CustomerHome.jsx'),
+    AdminHome = require('./AdminHome.jsx');
 
 var setStateLoadedFn;
 
