@@ -54,6 +54,13 @@ module.exports = {
       .set('Accept', 'application/json')
       .set('Authorization', "Bearer " + sessionStorage.getItem('accessToken'))
       .end(cb);
+  },
+
+  getJobs: function(cb){
+    request.get(APIRoot+API.JOBS)
+      .set('Accept', 'application/json')
+      .set('Authorization', "Bearer " + sessionStorage.getItem('accessToken'))
+      .end(cb)
   }
 
 };
