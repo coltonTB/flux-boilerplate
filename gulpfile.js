@@ -1,30 +1,37 @@
-var gulp = require('gulp'),
-    watch = require('gulp-watch'),
-    browserify = require('browserify'),
-    reactify = require('reactify'),
-    stylus = require('gulp-stylus'),
-    watchify = require('watchify'),
-    source = require('vinyl-source-stream');
+var 
+  gulp = require('gulp'),
+  browserify = require('browserify'),
+  reactify = require('reactify'),
+  stylus = require('gulp-stylus'),
+  watchify = require('watchify'),
+  source = require('vinyl-source-stream'),
+  b = watchify(browserify('./src/app.js')),
 
-var b = watchify(browserify('./js/app.js')); 
+  bundle = function() {
+    return b.bundle()
+      .on('error', function(err){
+        process.stderr.write(err.toString()+"\n")
+      })
+      .pipe(source('bundle.js'))
+      .pipe(gulp.dest('./build'));
+  };
+
+
+// Set up watchify events
 b.transform(reactify);
-b.on('update', bundle);
-b.on('update', function(u){
-    console.log(u);
+b.on('update', function(fileName){
+  process.stdout.write('Updating: ' + fileName[0] + "\n")
+  bundle();
 });
 
-function bundle() {
-  return b.bundle()
-    .pipe(source('bundle.js'))
-    .pipe(gulp.dest('./build'));
-}
 
+// Define Gulp Tasks
 gulp.task('browserify', bundle);
 
-gulp.task('stylus', function(){
-  gulp.src('./stylesheets/main.styl')
-    .pipe(watch('./stylesheets/**/*.styl'))
+gulp.task('stylus', function() {
+  gulp.src('./stylesheets/index.styl')
     .pipe(stylus())
+    .pipe(source('style.css'))
     .pipe(gulp.dest('./build'));
 });
 
